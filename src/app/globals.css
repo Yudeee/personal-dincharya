@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  /* Ayurvedic, grounded palette */
+  --color-bone: #f7f4ef;
+  --color-bone-deep: #ebe6dc;
+
+  /* Clay / terracotta */
+  --color-clay: #c4a484;
+  --color-clay-deep: #a67c52;
+  --color-clay-muted: #d4bfa7;
+
+  /* Olive / sage */
+  --color-sage: #7a8a62;
+  --color-sage-light: #9aab7f;
+  --color-sage-deep: #5c6b48;
+
+  /* Charcoal brown (not black) */
+  --color-earth: #3d3632;
+  --color-earth-light: #5c534d;
+  --color-earth-muted: #6b615a;
+
+  /* Supporting tones */
+  --color-warm-gray: #a89a8a;
+  --color-cool-bone: #e8e4dd;
+
+  /* Fonts */
+  --font-serif: Georgia, "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  --font-sans: "Avenir Next", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-bone);
+  }
+
+  body {
+    @apply bg-bone text-earth antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* Serif for reflective text */
+  h1, h2, .prompt-text {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  /* Primary action - singular, grounded */
+  .btn-primary {
+    @apply bg-earth text-bone px-8 py-4 rounded-full font-medium text-lg
+           transition-all duration-500 ease-out
+           hover:bg-earth-light
+           focus:outline-none focus:ring-2 focus:ring-earth focus:ring-offset-4 focus:ring-offset-bone;
+  }
+
+  /* Secondary - subtle, recedes */
+  .btn-subtle {
+    @apply text-earth-muted px-6 py-3 rounded-full font-medium
+           transition-all duration-500 ease-out
+           hover:text-earth hover:bg-bone-deep
+           focus:outline-none;
+  }
+
+  /* Choice buttons - binary decisions */
+  .btn-choice {
+    @apply w-full py-5 px-6 rounded-2xl text-lg font-medium
+           bg-cool-bone text-earth border border-transparent
+           transition-all duration-500 ease-out
+           hover:bg-bone-deep hover:border-clay-muted
+           focus:outline-none focus:ring-2 focus:ring-sage focus:ring-offset-2 focus:ring-offset-bone;
+  }
+
+  .btn-choice-selected {
+    @apply bg-sage text-bone border-sage;
+  }
+
+  /* Word selector - single word response */
+  .word-choice {
+    @apply px-5 py-2 rounded-full text-sm font-medium
+           bg-transparent text-earth-muted border border-cool-bone
+           transition-all duration-500 ease-out
+           hover:border-clay-muted hover:text-earth;
+  }
+
+  .word-choice-selected {
+    @apply bg-earth text-bone border-earth;
+  }
+
+  /* Text input - for reflection */
+  .reflection-input {
+    @apply w-full px-0 py-4 bg-transparent text-earth
+           border-0 border-b border-cool-bone
+           placeholder-warm-gray
+           focus:outline-none focus:border-clay
+           transition-all duration-300
+           resize-none;
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+}
+
+/* Soft transitions - feel like exhales */
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .fade-in-slow {
+    animation: fadeIn 1.2s ease-out forwards;
+  }
+
+  .fade-in-delayed {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Large breathing space */
+  .breathe {
+    @apply py-16 md:py-24;
+  }
+
+  .breathe-small {
+    @apply py-8 md:py-12;
+  }
+}
